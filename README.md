@@ -8,6 +8,7 @@ row ~138
 from:  
     $method = Arr::get($options, 'method', 'post');  
 to:  
+    $method = Arr::get($options, 'method', 'post');  
     $attributes['data-method'] = $method;  
 
 # ionic deployer #  
