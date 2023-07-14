@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^api/(.*)$ laravel/public/$1 [L]
+  RewriteRule ^adminionic build --prod。/(.*)$ laravel/public/$1 [L]
+  RewriteRule ^images/(.*)$ laravel/public/$1 [L]
+  RewriteRule ^(.*)$ ionic/mensa-app/www [L]
+</IfModule>
