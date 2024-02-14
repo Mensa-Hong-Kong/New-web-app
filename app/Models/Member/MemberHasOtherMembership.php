@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class MemberHasOtherMembership extends Model
+class MemberHasOtherMembership extends Pivot
 {
     /**
      * The attributes that are mass assignable.

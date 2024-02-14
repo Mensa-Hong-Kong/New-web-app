@@ -16,38 +16,4 @@ class MemberHasPublicType extends Model
         "public_type_id",
         "password",
     ];
-
-    public function member() {
-        return $this->hasOne( Member::class );
-    }
-    public function publicType() {
-        return $this->belongsToMany( publicType::class, MemberHasPublicType::class,  );
-    }
-    public function certifications() {
-        return $this->belongsToMany( Certification::class, MemberHasCertification::class,  );
-    }
-    public function certificate() {
-        return $this->belongsToMany( Certificate::class, MemberHasCertificate::class );
-    }
-    public function memberships() {
-        return $this->belongsToMany( Membership::class, MemberHasMembership::class );
-    }
-    public function appointments() {
-        return $this->hasMany( Appointment::class );
-    }
-    public function skills() {
-        return $this->hasMany( Skill::class, MemberHasSkill::class );
-    }
-    public function works() {
-        return $this->hasMany( Work::class, MemberHasWork::class );
-    }
-    public function colleges() {
-        return $this->hasMany( College::class, MemberHasCollege::class );
-    }
-    public function schools() {
-        return $this->hasMany( School::class, MemberHasSchool::class );
-    }
-    public function awards() {
-        return $this->hasMany( Award::class, MemberHasAward::class );
-    }
 }

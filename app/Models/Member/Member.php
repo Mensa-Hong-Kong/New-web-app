@@ -18,6 +18,8 @@ class Member extends Model
         "mobile",
         "whatsapp",
         "skype",
+        "image",
+        "description",
     ];
 
     public function member() {
