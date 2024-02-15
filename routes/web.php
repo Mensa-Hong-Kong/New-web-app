@@ -103,6 +103,8 @@ Route::middleware( "auth" )->group(
             ->except( [ "index", "create", "edit" ] );
         Route::resource( "/profile/notifications", NotificationController::class )
             ->only( [ "index", "update" ] );
+        Route::resource( "/profile/notifications", NotificationController::class )
+            ->only( [ "index", "update" ] );
         Route::prefix( "admin" )->name( "admin." )->middleware( "role:administrator" )->group(
             function() {
                 // admin
