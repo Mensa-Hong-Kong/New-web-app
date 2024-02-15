@@ -15,4 +15,10 @@ class Affiliation extends Model
         "name",
         "is_limit",
     ];
+    public function appointments() {
+        return $this->hasMany( Appointment::class );
+    }
+    public function members() {
+        return $this->belongsToMany( Member::class, MemberHasOtherMembership::class );
+    }
 }

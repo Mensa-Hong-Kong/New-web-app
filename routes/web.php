@@ -19,21 +19,14 @@ use App\Http\Controllers\Auth\ForgerPasswordController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-/*
-    $pages = Page::where( "limit", 0 )
-        ->whereNotNull( "path" )
-        ->get();
-    foreach( $pages as $page ) {
-        Route::get( $path, "PageController@show" )
-            ->name( "about-us" )
-            ->default( "pageID", $page[ "id" ] );
-    }
-*/
-use Illuminate\Support\Facades\Http;
-Route::get('/testing', function () {
-    $IPs = Http::get( env( "STRIPE_API_IPS" ) )->json();
-    var_dump( in_array( "13.112.224.240", $IPs[ "API" ] ) );
-})->name( "index" );
+$pages = Page::where( "limit", 0 )
+    ->whereNotNull( "path" )
+    ->get();
+foreach( $pages as $page ) {
+    Route::get( $path, "PageController@show" )
+        ->name( "about-us" )
+        ->default( "pageID", $page[ "id" ] );
+}
 Route::get('/', function () {
         return view("index");
     })->name( "index" );
@@ -86,15 +79,13 @@ Route::middleware( "auth" )->group(
         // user
         Route::get( "/logout", "AuthController@logout" )
             ->name( "logout" );
-        /*
-            $pages = Page::where( "limit", "!=", 0 )
-                ->whereNotNull( "path" )
-                ->get();
-            foreach( $pages as $page ) {
-                Route::get( $path, "PageController@show" )
-                    ->default( "pageID", $page[ "id" ] );
-            }
-        */
+        $pages = Page::where( "limit", "!=", 0 )
+            ->whereNotNull( "path" )
+            ->get();
+        foreach( $pages as $page ) {
+            Route::get( $path, "PageController@show" )
+                ->default( "pageID", $page[ "id" ] );
+        }
         Route::resource( "/cart", CartController::class )
             ->except( [ "create", "show", "edit" ] );
         Route::get( "/check-out", "OrderController@create" )
@@ -105,19 +96,26 @@ Route::middleware( "auth" )->group(
             ->name( "orders.success" );
         Route::get( "/paying/failed", "OrderController@failed" )
             ->name( "orders.failed" );
-        Route::singleton( "/user", UserController::class );
-        Route::resource( "/notifications", NotificationChannelController::class )
+        Route::singleton( "/profile", UserController::class );
+        Route::resource( "/address", AddressController::class )
+            ->except( [ "index", "create", "edit" ] );
+        Route::resource( "/address", AddressController::class )
+            ->except( [ "index", "create", "edit" ] );
+        Route::resource( "/profile/notifications", NotificationController::class )
             ->only( [ "index", "update" ] );
         Route::prefix( "admin" )->name( "admin." )->middleware( "role:administrator" )->group(
             function() {
                 // admin
                 Route::get( "/", "AdministrationController@index" );
                 Route::get( "/check-in/{user}", "AdmissionTestController@checkIn" );
+                Route::resource( "/users", AdminUserController::class )
+                    ->except( [ "show", "destroy" ] );
+                Route::singleton( "/navigation", AdminNavigationController::class );
                 Route::resource( "/news", AdminNewsController::class )
                     ->except( [ "show", "destroy" ] );
                 Route::resource( "/events", AdminEventController::class )
                     ->except( [ "show", "destroy" ] );
-                Route::resource( "/users", AdminUserController::class )
+                Route::resource( "/pages", AdminPageController::class )
                     ->except( [ "show", "destroy" ] );
                 Route::resource( "/shop/products", AdminProductController::class )
                     ->except( [ "show", "destroy" ] );

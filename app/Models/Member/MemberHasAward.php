@@ -2,9 +2,9 @@
 
 namespace App\Models\Member;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class MemberHasAward extends Pivot
+class MemberHasAward extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -18,4 +18,10 @@ class MemberHasAward extends Pivot
         "issue_month",
         "issue_date",
     ];
+    public function member() {
+        return $this->belongsTo( Member::class );
+    }
+    public function name() {
+        return $this->belongsTo( School::class );
+    }
 }

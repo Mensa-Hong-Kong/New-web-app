@@ -50,9 +50,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function member() {
-        return $this->hasOne( Member::class );
-    }
     /**
      * A model may have multiple roles.
      */
@@ -75,5 +72,23 @@ class User extends Authenticatable
                 $teamField = config('permission.table_names.roles').'.'.PermissionRegistrar::$teamsKey;
                 $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
             });
+    }
+    public function testingFee() {
+        return $this->hasOne( AdmissionTestOrder::class );
+    }
+    public function testing() {
+        return $this->hasMany( UserAdmissionTest::class );
+    }
+    public function member(){
+        return $this->hasOne( Member::class );
+    }
+    public function registeredEvents(){
+        return $this->hasMany( Member::class );
+    }
+    public function cart(){
+        return $this->hasMany( Cart::class );
+    }
+    public function orders(){
+        return $this->hasMany( Order::class );
     }
 }

@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class MemberSkill extends Pivot
+class MemberHasSubscription extends Pivot
 {
     /**
      * The attributes that are mass assignable.
@@ -13,6 +13,7 @@ class MemberSkill extends Pivot
      */
     protected $fillable = [
         "member_id",
-        "skill_id",
+        "subscription_id",
+        "price",
     ];
 }

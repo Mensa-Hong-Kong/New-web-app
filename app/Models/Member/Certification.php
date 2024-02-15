@@ -18,4 +18,7 @@ class Certification extends Model
         "issue_month",
         "issue_date",
     ];
+    public function members() {
+        return $this->belongsToMany( Member::class );
+    }
 }

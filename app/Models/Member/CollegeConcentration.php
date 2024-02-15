@@ -2,9 +2,9 @@
 
 namespace App\Models\Member;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class MemberHasCollegeConcentration extends Pivot
+class CollegeConcentration extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,4 +14,13 @@ class MemberHasCollegeConcentration extends Pivot
     protected $fillable = [
         "name"
     ];
+    public function firstConcentrationMembers() {
+        return $this->belongsToMany( Member::class, MemberHasCollege::class );
+    }
+    public function secondConcentrationMembers() {
+        return $this->belongsToMany( Member::class, MemberHasCollege::class );
+    }
+    public function thirdConcentrationMembers() {
+        return $this->belongsToMany( Member::class, MemberHasCollege::class );
+    }
 }

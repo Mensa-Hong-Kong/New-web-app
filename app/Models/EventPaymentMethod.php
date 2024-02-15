@@ -4,12 +4,12 @@
     use Illuminate\Database\Eloquent\Model;
     use App\Models\Navigation;
 
-    class EventType extends Model {
+    class EventPaymentMethod extends Model {
         protected $fillable = [
             "name",
         ];
         public function events() {
-            return $this->hasMany( Event::class, "type_id" );
+            return $this->belongsToMany( Event::class );
         }
     }
 ?>

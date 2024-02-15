@@ -2,9 +2,9 @@
 
 namespace App\Models\Member;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class MemberHasOtherMembership extends Pivot
+class MemberHasOtherMembership extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,7 +13,7 @@ class MemberHasOtherMembership extends Pivot
      */
     protected $fillable = [
         "member_id",
-        "other_membership_id",
+        "association_id",
         "type",
         "from_year",
         "from_mouth",
@@ -22,4 +22,10 @@ class MemberHasOtherMembership extends Pivot
         "to_mouth",
         "to_date",
     ];
+    public function member() {
+        return $this->belongsTo( Member::class );
+    }
+    public function association() {
+        return $this->belongsTo( Association::class );
+    }
 }

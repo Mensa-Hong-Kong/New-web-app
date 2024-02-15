@@ -14,4 +14,10 @@ class Affiliation extends Model
     protected $fillable = [
         "name",
     ];
+    public function appointments() {
+        return $this->hasMany( Appointment::class );
+    }
+    public function members() {
+        return $this->belongsToMany( Member::class, MemberHasOtherMembership::class );
+    }
 }

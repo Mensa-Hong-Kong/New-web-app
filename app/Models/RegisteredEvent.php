@@ -4,11 +4,11 @@
     use Illuminate\Database\Eloquent\Model;
     use App\Models\Navigation;
 
-    class EventRegister extends Model {
+    class RegisteredEvent extends Model {
         protected $fillable = [
             "event_id",
             "role_id",
-            "number_guests",
+            "number_of_bring_guests",
             "answers",
             "amount",
             "expires_at",
@@ -17,7 +17,7 @@
         public function user() {
             return $this->belongsTo( User::class );
         }
-        public function event() {
+        public function detail() {
             return $this->belongsTo( Event::class );
         }
     }

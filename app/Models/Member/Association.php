@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MemberHasPublicType extends Model
+class Association extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,8 +12,9 @@ class MemberHasPublicType extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "member_id",
-        "public_type_id",
-        "password",
+        "name",
     ];
+    public function members() {
+        return $this->belongsToMany( Member::class, MemberHasOtherMembership::class );
+    }
 }

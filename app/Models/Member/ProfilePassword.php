@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AppointmentRole extends Model
+class ProfilePassword extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,7 @@ class AppointmentRole extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "name",
+        "member_id",
+        "password",
     ];
-    public function appointments() {
-        return $this->hasMany( Appointment::class );
-    }
 }

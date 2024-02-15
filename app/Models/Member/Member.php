@@ -13,46 +13,53 @@ class Member extends Model
      */
     protected $fillable = [
         'forwarding_email',
-        "address",
+        "default_address_id",
         "countryCode",
         "mobile",
         "whatsapp",
         "skype",
         "image",
         "description",
+        "public_type_id",
     ];
 
-    public function member() {
-        return $this->hasOne( Member::class );
+    public function subscriptions() {
+        return $this->belongsToMany( Subscription::class, MemberHasSubscription::class,  );
+    }
+    public function addresses() {
+        return $this->hasMany( Member::class );
     }
     public function publicType() {
-        return $this->belongsToMany( PublicType::class, MemberHasPublicType::class,  );
+        return $this->belongsTo( PublicType::class );
+    }
+    public function profilePassword() {
+        return $this->hasOne( ProfilePassword::class );
     }
     public function certifications() {
-        return $this->belongsToMany( Certification::class, MemberHasCertification::class,  );
+        return $this->hasMany( MemberHasCertification::class );
     }
-    public function certificate() {
-        return $this->belongsToMany( Certificate::class, MemberHasCertificate::class );
+    public function certificates() {
+        return $this->hasMany( MemberHasCertificate::class );
     }
     public function memberships() {
-        return $this->belongsToMany( Membership::class, MemberHasMembership::class );
+        return $this->hasMany( MemberHasMembership::class );
     }
     public function appointments() {
         return $this->hasMany( Appointment::class );
     }
     public function skills() {
-        return $this->hasMany( Skill::class, MemberHasSkill::class );
+        return $this->belongsToMany( Skill::class, MemberHasSkill::class );
     }
     public function works() {
-        return $this->hasMany( Work::class, MemberHasWork::class );
+        return $this->hasMany( Work::class );
     }
     public function colleges() {
-        return $this->hasMany( College::class, MemberHasCollege::class );
+        return $this->hasMany( MemberHasCollege::class );
     }
     public function schools() {
-        return $this->hasMany( School::class, MemberHasSchool::class );
+        return $this->hasMany( MemberHasSchool::class );
     }
     public function awards() {
-        return $this->hasMany( Award::class, MemberHasAward::class );
+        return $this->hasMany( MemberHasAward::class );
     }
 }

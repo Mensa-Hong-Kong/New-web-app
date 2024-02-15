@@ -2,9 +2,9 @@
 
 namespace App\Models\Member;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class MemberHasCollege extends Pivot
+class MemberHasCollege extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -25,4 +25,19 @@ class MemberHasCollege extends Pivot
         "concentration3_id",
         "certificate",
     ];
+    public function member() {
+        return $this->belongsTo( Member::class );
+    }
+    public function name() {
+        return $this->belongsTo( College::class );
+    }
+    public function firstConcentration() {
+        return $this->belongsTo( CollegeConcentration::class, "concentration1_id" );
+    }
+    public function secondConcentration() {
+        return $this->belongsTo( CollegeConcentration::class, "concentration2_id" );
+    }
+    public function thirdConcentration() {
+        return $this->belongsTo( CollegeConcentration::class, "concentration3_id" );
+    }
 }

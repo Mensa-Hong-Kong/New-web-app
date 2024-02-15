@@ -7,6 +7,7 @@
     class Role extends Model {
         protected $fillable = [
             "role_id",
+            "team_id",
             "name",
             "guard_name",
             "appointment_role_id"

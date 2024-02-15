@@ -12,6 +12,7 @@ class Appointment extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        "member_id",
         "organize_id",
         "team_id",
         "role_id",
@@ -24,8 +25,8 @@ class Appointment extends Model
         "to_date",
         "to",
     ];
-    public function members() {
-        return $this->hasMany( Member::class );
+    public function member() {
+        return $this->belongsTo( Member::class );
     }
     public function organize() {
         return $this->belongsTo( Organize::class );

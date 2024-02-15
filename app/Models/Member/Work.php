@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MemberHasWork extends Model
+class Work extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -22,4 +22,10 @@ class MemberHasWork extends Model
         "to_mouth",
         "to_date",
     ];
+    public function company() {
+        return $this->belongsTo( Company::class );
+    }
+    public function position() {
+        return $this->belongsTo( Position::class );
+    }
 }

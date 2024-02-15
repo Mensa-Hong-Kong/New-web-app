@@ -14,4 +14,7 @@ class Position extends Model
     protected $fillable = [
         "name",
     ];
+    public function works() {
+        return $this->hasMany( Work::class );
+    }
 }

@@ -15,4 +15,10 @@ class Skill extends Model
         "name",
         "type_id",
     ];
+    public function type() {
+        return $this->belongsTo( Type::class );
+    }
+    public function members() {
+        return $this->belongsToMany( Member::class );
+    }
 }

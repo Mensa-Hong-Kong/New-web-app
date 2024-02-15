@@ -14,4 +14,10 @@ class Team extends Model
     protected $fillable = [
         "name",
     ];
+    public function roles() {
+        return $this->hasMany(Role::class);
+    }
+    public function users() {
+        return $this->belongsToMany(User::class);
+    }
 }

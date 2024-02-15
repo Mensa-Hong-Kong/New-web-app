@@ -13,8 +13,8 @@ class Subscription extends Model
      */
     protected $fillable = [
         "year",
-        'adult_price',
         'price',
+        'price_type_id',
         "spatie_product_id",
     ];
 }

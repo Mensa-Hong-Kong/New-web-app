@@ -18,4 +18,10 @@ class MemberHasCertification extends Pivot
         "issue_month",
         "issue_date",
     ];
+    public function member() {
+        return $this->belongsTo( Certification::class );
+    }
+    public function name() {
+        return $this->belongsTo( Certification::class );
+    }
 }

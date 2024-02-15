@@ -14,4 +14,7 @@ class College extends Model
     protected $fillable = [
         "name",
     ];
+    public function members() {
+        return $this->belongsToMany( Member::class );
+    }
 }

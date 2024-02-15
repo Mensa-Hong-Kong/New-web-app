@@ -2,9 +2,9 @@
 
 namespace App\Models\Member;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class MemberHasSchool extends Pivot
+class MemberHasSchool extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -23,4 +23,10 @@ class MemberHasSchool extends Pivot
         "from_grade",
         "to_grade",
     ];
+    public function member() {
+        return $this->belongsTo( Member::class );
+    }
+    public function name() {
+        return $this->belongsTo( School::class );
+    }
 }
