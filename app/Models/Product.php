@@ -7,19 +7,19 @@
     class Product extends Model {
         protected $fillable = [
             "name",
-            "description",
+            "keywords",
             "image",
-            "on_sale",
-            "price",
-            "unsubscribed_price",
-            "subscribed_price",
+            "description",
+            "for_sale",
+            "not_for_sale_at",
             "total",
             "quantity",
-            "logistics",
-            "spatie_product_id",
         ];
         public function cart() {
             return $this->hasMany( Cart::class );
+        }
+        public function prices() {
+            return $this->hasMany( Price::class );
         }
     }
 ?>

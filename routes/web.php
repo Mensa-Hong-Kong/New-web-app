@@ -19,14 +19,6 @@ use App\Http\Controllers\Auth\ForgerPasswordController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-$pages = Page::where( "limit", 0 )
-    ->whereNotNull( "path" )
-    ->get();
-foreach( $pages as $page ) {
-    Route::get( $path, "PageController@show" )
-        ->name( "about-us" )
-        ->default( "pageID", $page[ "id" ] );
-}
 Route::get('/', function () {
         return view("index");
     })->name( "index" );
@@ -55,7 +47,7 @@ Route::resource( "/members", MemberController::class )
     ->only( [ "index", "show" ] );
 Route::resource( "/shop/products", ProductController::class )
     ->only( [ "index", "show" ] )
-    ->names(  );
+    ->names( "shop.products" );
 Route::get( "/privileges", "PageController@show" )
     ->name( "privileges" );
 Route::get( "/frequently-asked-question", "PageController@frequentlyAskedQuestion" )
@@ -79,13 +71,6 @@ Route::middleware( "auth" )->group(
         // user
         Route::get( "/logout", "AuthController@logout" )
             ->name( "logout" );
-        $pages = Page::where( "limit", "!=", 0 )
-            ->whereNotNull( "path" )
-            ->get();
-        foreach( $pages as $page ) {
-            Route::get( $path, "PageController@show" )
-                ->default( "pageID", $page[ "id" ] );
-        }
         Route::resource( "/cart", CartController::class )
             ->except( [ "create", "show", "edit" ] );
         Route::get( "/check-out", "OrderController@create" )

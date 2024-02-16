@@ -4,15 +4,13 @@
     use Illuminate\Database\Eloquent\Model;
     use App\Models\Navigation;
 
-    class CustomPage extends Model {
+    class Channel extends Model {
         protected $fillable = [
             "name",
-            "route_name",
+            "team_id",
         ];
-
-        public function navigationNode(): MorphOne
-        {
-            return $this->morphOne( Navigation::class, "type" );
+        public function users() {
+            return $this->belongsToMany( User::class, "user_subscription_channels" );
         }
     }
 ?>

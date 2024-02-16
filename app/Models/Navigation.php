@@ -2,33 +2,39 @@
     namespace App\Models;
 
     use Illuminate\Database\Eloquent\Model;
-    use App\Models\Permission;
-    use App\Models\PermissionType;
-    use App\Models\RoleHasModulePermission;
-    use App\Models\UserHasModulePermission;
-    use App\Models\Forum;
-    use App\Models\Page;
-    use App\Models\User;
+    use Illuminate\Database\Eloquent\Relations\HasOne;
+    use Illuminate\Database\Eloquent\Relations\HasMany;
+    use Illuminate\Database\Eloquent\Relations\MorphTo;
+    use App\Models\Navigation;
 
     class Navigation extends Model {
         protected $table = 'navigation';
         protected $fillable = [
             "name",
-            "limit", // 0 user, 1 unsubscribed member, 2 unsubscribed member, 3 admin
             "parent_id",
             "order_number",
+            "page_id",
+            "page_type",
         ];
-        public function page() {
-            return $this->hasOne( Page::class, 'id', 'parent_id');
+
+        public function page(): MorphTo
+        {
+            return $this->morphTo( __FUNCTION__, "type" );
         }
-        public function customPage() {
-            return $this->hasOne( CustomPage::class, 'id', 'parent_id');
-        }
-        public function parent() {
+
+        public function parent(): HasOne
+        {
             return $this->hasOne( Navigation::class, 'id', 'parent_id');
         }
-        public function children() {
+
+        public function children(): HasMany
+        {
             return $this->hasMany( Navigation::class, 'parent_id', 'id');
+        }
+
+        public function roles(): HasMany
+        {
+            return $this->belongsToMany( Role::class, 'role_can_view_navigation' );
         }
     }
 ?>

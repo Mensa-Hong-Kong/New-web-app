@@ -9,6 +9,7 @@
             "year",
             "month",
             "name",
+            "description",
         ];
     }
 ?>

@@ -4,18 +4,18 @@
     use Illuminate\Database\Eloquent\Model;
     use App\Models\Navigation;
 
-    class EventGuestPrice extends Model {
+    class ProductPrice extends Model {
         protected $fillable = [
-            'price',
-            "event_id",
+            "price",
             "type_id",
             "spatie_product_id",
+            "for_sale_at",
         ];
-        public function event() {
-            return $this->belongsTo( Event::class );
+        public function product() {
+            return $this->belongsTo( Product::class );
         }
         public function type() {
-            return $this->belongsTo( EventGuestPriceType::class );
+            return $this->belongsTo( ProductPriceType::class, "type_id" );
         }
     }
 ?>

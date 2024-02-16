@@ -73,11 +73,17 @@ class User extends Authenticatable
                 $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
             });
     }
+    public function subscriptChannels() {
+        return $this->hasOne( Channel::class, "user_subscription_channels" );
+    }
     public function testingFee() {
         return $this->hasOne( AdmissionTestOrder::class );
     }
     public function testing() {
         return $this->hasMany( UserAdmissionTest::class );
+    }
+    public function subscriptions() {
+        return $this->belongsToMany( Subscription::class, MemberHasSubscription::class, "subscription_id" );
     }
     public function member(){
         return $this->hasOne( Member::class );

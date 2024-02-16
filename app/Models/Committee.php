@@ -7,7 +7,7 @@
     class Committee extends Model {
         protected $fillable = [
             "team_id",
-            "convener_id",
+            "description",
         ];
         public function committee() {
             return $this->belongsTo( User::class );

@@ -9,9 +9,10 @@
             'price',
             "type_id",
             "spatie_product_id",
+            "for_register_at",
         ];
         public function type() {
-            return $this->belongsTo( EventType::class, "type_id" );
+            return $this->belongsTo( PriceType::class, "type_id" );
         }
     }
 ?>

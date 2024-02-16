@@ -11,6 +11,7 @@
             "address",
             "amount",
             "expires_at",
+            "payment_method_id",
             "is_paid",
             "is_sent_logistics",
         ];

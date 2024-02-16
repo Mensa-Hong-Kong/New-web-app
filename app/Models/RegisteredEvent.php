@@ -7,7 +7,8 @@
     class RegisteredEvent extends Model {
         protected $fillable = [
             "event_id",
-            "role_id",
+            "user_id",
+            "payment_method_id",
             "number_of_bring_guests",
             "answers",
             "amount",

@@ -15,5 +15,6 @@ class Contact extends Pivot
         "name",
         "type",
         "link",
+        "contact",
     ];
 }

@@ -4,7 +4,7 @@
     use Illuminate\Database\Eloquent\Model;
     use App\Models\Navigation;
 
-    class EventPaymentMethod extends Model {
+    class PaymentMethod extends Model {
         protected $fillable = [
             "name",
         ];

@@ -23,9 +23,6 @@ class Member extends Model
         "public_type_id",
     ];
 
-    public function subscriptions() {
-        return $this->belongsToMany( Subscription::class, MemberHasSubscription::class,  );
-    }
     public function addresses() {
         return $this->hasMany( Member::class );
     }
