@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('channels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->bigIncrements('team_id');
+            $table->unsignedBigInteger('team_id');
             $table->timestamps();
         });
     }

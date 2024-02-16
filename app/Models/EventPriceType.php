@@ -7,7 +7,6 @@
     class PriceType extends Model {
         protected $fillable = [
             "name",
-            "for_register_at",
         ];
         public function events() {
             return $this->belongsToMany( Event::class, EventPrice::class, "event_id", "type_id" );
