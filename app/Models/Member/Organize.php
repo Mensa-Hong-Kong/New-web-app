@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Affiliation extends Model
+class Organize extends Model
 {
     /**
      * The attributes that are mass assignable.

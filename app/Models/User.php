@@ -19,16 +19,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         "username",
+        "passport",
         "password",
         "nickname",
         "given_name",
         "middle_name",
         "family_name",
         "date_of_birth",
-        "gender",
-        "passport",
-        "notification_email",
-        "email_verified_at",
+        "gender_id",
+        "notification_email_id",
+        "notification_mobile_id",
     ];
 
     /**
@@ -73,8 +73,23 @@ class User extends Authenticatable
                 $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
             });
     }
+    public function gender() {
+        return $this->belongsTo( Gender::class );
+    }
+    public function email() {
+        return $this->belongsTo( Email::class );
+    }
+    public function notificationEmail() {
+        return $this->hasOne( Email::class, "notification_email_id" );
+    }
+    public function mobile() {
+        return $this->belongsTo( Mobile::class );
+    }
+    public function notificationMobile() {
+        return $this->hasOne( Mobile::class, "notification_email_id" );
+    }
     public function subscriptChannels() {
-        return $this->hasOne( Channel::class, "user_subscription_channels" );
+        return $this->belongsToMany( Channel::class, "user_subscription_channels" );
     }
     public function testingFee() {
         return $this->hasOne( AdmissionTestOrder::class );

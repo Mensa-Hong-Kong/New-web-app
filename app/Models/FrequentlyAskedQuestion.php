@@ -2,9 +2,9 @@
 
 namespace App\Models\Member;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class FrequentlyAskedQuestion extends Pivot
+class FrequentlyAskedQuestion extends Model
 {
     /**
      * The attributes that are mass assignable.

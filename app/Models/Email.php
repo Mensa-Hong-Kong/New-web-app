@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Certification extends Model
+class Email extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,8 @@ class Certification extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "name",
+        "user_id",
+        "email",
+        "verified_at",
     ];
-    public function members() {
-        return $this->belongsToMany( Member::class, MemberHasCertification::class );
-    }
 }

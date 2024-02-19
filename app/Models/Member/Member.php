@@ -14,10 +14,6 @@ class Member extends Model
     protected $fillable = [
         'forwarding_email',
         "default_address_id",
-        "countryCode",
-        "mobile",
-        "whatsapp",
-        "skype",
         "image",
         "description",
         "public_type_id",
@@ -25,6 +21,9 @@ class Member extends Model
 
     public function addresses() {
         return $this->hasMany( Member::class );
+    }
+    public function contacts() {
+        return $this->hasMany( MemberContact::class );
     }
     public function publicType() {
         return $this->belongsTo( PublicType::class );

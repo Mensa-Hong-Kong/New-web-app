@@ -10,5 +10,8 @@
             "time",
             "number_of_seats",
         ];
+        public function users() {
+            return $this->belongsToMany(User::class, UserAdmissionTest);
+        }
     }
 ?>

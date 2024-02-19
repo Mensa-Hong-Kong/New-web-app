@@ -3,8 +3,9 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Models\ContactType;
 
-class Contact extends Pivot
+class MemberContact extends Pivot
 {
     /**
      * The attributes that are mass assignable.
