@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('url');
+            $table->string('controller');
+            $table->string('method');
             $table->boolean('is_fixed');
             $table->timestamps();
         });

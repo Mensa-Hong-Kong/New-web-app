@@ -8,7 +8,9 @@
         protected $fillable = [
             "name",
             "url",
-            "is_fixed"
+            "controller",
+            "method",
+            "is_fixed",
         ];
 
         public function navigationNode(): MorphOne
