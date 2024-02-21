@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
+use App\Models\Member\Member;
 
 class User extends Authenticatable
 {
@@ -53,7 +55,7 @@ class User extends Authenticatable
     /**
      * A model may have multiple roles.
      */
-    public function roles(): BelongsToMany
+    public function roles()
     {
         $relation = $this->morphToMany(
             Role::class,
@@ -97,14 +99,11 @@ class User extends Authenticatable
     public function testing() {
         return $this->hasMany( UserAdmissionTest::class );
     }
-    public function subscriptions() {
-        return $this->belongsToMany( Subscription::class, MemberHasSubscription::class, "subscription_id" );
-    }
     public function member(){
         return $this->hasOne( Member::class );
     }
-    public function registeredEvents(){
-        return $this->hasMany( Member::class );
+    public function events(){
+        return $this->belongsToMany( Event::class, RegisteredEvent::class );
     }
     public function cart(){
         return $this->hasMany( Cart::class );

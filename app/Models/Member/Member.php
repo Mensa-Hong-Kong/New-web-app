@@ -19,9 +19,6 @@ class Member extends Model
         "public_type_id",
     ];
 
-    public function addresses() {
-        return $this->hasMany( Member::class );
-    }
     public function contacts() {
         return $this->hasMany( MemberContact::class );
     }
@@ -38,7 +35,7 @@ class Member extends Model
         return $this->hasMany( MemberHasCertificate::class );
     }
     public function memberships() {
-        return $this->hasMany( MemberHasMembership::class );
+        return $this->hasMany( MemberHasOtherMembership::class );
     }
     public function appointments() {
         return $this->hasMany( Appointment::class );

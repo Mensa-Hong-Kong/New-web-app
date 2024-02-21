@@ -14,7 +14,7 @@ class MemberHasOtherMembership extends Model
     protected $fillable = [
         "member_id",
         "association_id",
-        "type",
+        "type_id",
         "from_year",
         "from_mouth",
         "from_date",
@@ -27,5 +27,8 @@ class MemberHasOtherMembership extends Model
     }
     public function association() {
         return $this->belongsTo( Association::class );
+    }
+    public function type() {
+        return $this->belongsTo( OtherMembershipType::class );
     }
 }

@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('profile_passwords', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('type_id');
-            $table->string('link');
-            $table->string('contact');
+            $table->unsignedBigInteger('member_id');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('profile_passwords');
     }
 };

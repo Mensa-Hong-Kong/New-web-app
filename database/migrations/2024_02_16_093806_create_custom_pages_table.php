@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('custom_pages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('route_name');
+            $table->string('url');
+            $table->boolean('is_fixed');
             $table->timestamps();
         });
     }

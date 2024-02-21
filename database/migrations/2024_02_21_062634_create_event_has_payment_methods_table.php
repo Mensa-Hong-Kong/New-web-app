@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('event_has_payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('type_id');
-            $table->string('link');
-            $table->string('contact');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('event_has_payment_methods');
     }
 };

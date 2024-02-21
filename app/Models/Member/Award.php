@@ -13,6 +13,7 @@ class Award extends Model
      */
     protected $fillable = [
         "name",
+        "is_limit",
     ];
     public function members() {
         return $this->belongsToMany( Member::class );

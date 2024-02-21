@@ -23,7 +23,7 @@ class MemberHasCollege extends Model
         "concentration1_id",
         "concentration2_id",
         "concentration3_id",
-        "certificate",
+        "certificate_type_id",
     ];
     public function member() {
         return $this->belongsTo( Member::class );
@@ -39,5 +39,8 @@ class MemberHasCollege extends Model
     }
     public function thirdConcentration() {
         return $this->belongsTo( CollegeConcentration::class, "concentration3_id" );
+    }
+    public function certificateType() {
+        return $this->belongsTo( CollegeCertificateType::class, "certificate_type_id" );
     }
 }

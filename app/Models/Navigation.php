@@ -5,7 +5,6 @@
     use Illuminate\Database\Eloquent\Relations\HasOne;
     use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Database\Eloquent\Relations\MorphTo;
-    use App\Models\Navigation;
 
     class Navigation extends Model {
         protected $table = 'navigation';
@@ -32,9 +31,8 @@
             return $this->hasMany( Navigation::class, 'parent_id', 'id');
         }
 
-        public function roles(): HasMany
+        public function roles()
         {
             return $this->belongsToMany( Role::class, 'role_can_view_navigation' );
         }
     }
-?>

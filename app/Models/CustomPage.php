@@ -7,7 +7,8 @@
     class CustomPage extends Model {
         protected $fillable = [
             "name",
-            "route_name",
+            "url",
+            "is_fixed"
         ];
 
         public function navigationNode(): MorphOne

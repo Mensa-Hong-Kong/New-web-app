@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('email');
-            $table->dateTime('verified_at');
+            $table->dateTime('verified_at')->nullable();
             $table->timestamps();
         });
     }

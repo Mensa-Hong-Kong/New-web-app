@@ -20,13 +20,19 @@ class MemberHasSchool extends Model
         "to_year",
         "to_mouth",
         "to_date",
-        "from_grade",
-        "to_grade",
+        "from_grade_id",
+        "to_grade_id",
     ];
     public function member() {
         return $this->belongsTo( Member::class );
     }
     public function name() {
         return $this->belongsTo( School::class );
+    }
+    public function fromGrade() {
+        return $this->belongsTo( SchoolGrade::class );
+    }
+    public function toGrade() {
+        return $this->belongsTo( SchoolGrade::class );
     }
 }

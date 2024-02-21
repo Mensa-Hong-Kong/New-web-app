@@ -4,7 +4,7 @@ namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class OtherMembershipType extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,9 +12,6 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "name",
+        "name"
     ];
-    public function works() {
-        return $this->hasMany( Work::class );
-    }
 }

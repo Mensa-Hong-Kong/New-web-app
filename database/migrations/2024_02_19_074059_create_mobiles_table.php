@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->integer('country_code');
             $table->integer('mobile');
-            $table->dateTime('verified_at');
+            $table->dateTime('verified_at')->nullable();
             $table->timestamps();
         });
     }
