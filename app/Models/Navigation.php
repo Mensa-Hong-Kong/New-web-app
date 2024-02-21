@@ -30,9 +30,4 @@
         {
             return $this->hasMany( Navigation::class, 'parent_id', 'id');
         }
-
-        public function roles()
-        {
-            return $this->belongsToMany( Role::class, 'role_can_view_navigation' );
-        }
     }
