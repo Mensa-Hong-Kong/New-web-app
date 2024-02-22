@@ -13,7 +13,6 @@ class Member extends Model
      */
     protected $fillable = [
         'forwarding_email',
-        "default_address_id",
         "image",
         "description",
         "public_type_id",
@@ -34,7 +33,7 @@ class Member extends Model
     public function certificates() {
         return $this->hasMany( MemberHasCertificate::class );
     }
-    public function memberships() {
+    public function otherMemberships() {
         return $this->hasMany( MemberHasOtherMembership::class );
     }
     public function appointments() {

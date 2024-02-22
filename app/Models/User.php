@@ -31,6 +31,7 @@ class User extends Authenticatable
         "gender_id",
         "notification_email_id",
         "notification_mobile_id",
+        "default_address_id",
     ];
 
     /**
@@ -85,6 +86,12 @@ class User extends Authenticatable
         return $this->hasOne( Email::class, "notification_email_id" );
     }
     public function mobile() {
+        return $this->belongsTo( Mobile::class );
+    }
+    public function mainAddress() {
+        return $this->hasOne( Address::class, "default_address_id" );
+    }
+    public function address() {
         return $this->belongsTo( Mobile::class );
     }
     public function notificationMobile() {

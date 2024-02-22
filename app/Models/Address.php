@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Member;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,7 +12,7 @@ class Address extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "member_id",
+        "user_id",
         'address',
     ];
 

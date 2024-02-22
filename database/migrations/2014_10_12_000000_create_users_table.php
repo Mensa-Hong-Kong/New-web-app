@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('gender_id');
             $table->unsignedBigInteger('notification_email_id');
             $table->unsignedBigInteger('notification_mobile_id');
+            $table->unsignedBigInteger('default_address_id');
             $table->rememberToken();
             $table->timestamps();
         });

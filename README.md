@@ -1,10 +1,10 @@
 因為 ionic 要實現 OG tag 有一定難度, 因此先除掉 ionic
 
 ### 開發階段目標 ###
-- [x] web routes  
 - [x] models  
 - [x] models relationship  
 - [x] migrations  
+- [x] web routes  
 - [ ] controllers  
 - [ ] seeders  
 - [ ] views  
@@ -17,9 +17,6 @@
 - [ ] tests  
 - [ ] set git permission
 - [ ] user acceptance testing  
-  
-### need confirm ###  
-1. 物流 API(網店物流)  
   
 ### Laravel deployer###  
 git ignored vendor  

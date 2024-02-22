@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
             $table->string('forwarding_email');
-            $table->unsignedBigInteger('default_address_id');
             $table->string('image');
             $table->text('description');
             $table->unsignedBigInteger('public_type_id');
