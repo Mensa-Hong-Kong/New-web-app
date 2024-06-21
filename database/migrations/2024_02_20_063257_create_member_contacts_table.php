@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('member_contacts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('member_id');
             $table->string('name');
             $table->unsignedBigInteger('type_id');
             $table->string('link');
             $table->string('contact');
+            $table->unsignedBigInteger('order_number');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 
 class Appointment extends Model
 {
@@ -32,7 +33,7 @@ class Appointment extends Model
         return $this->belongsTo( Organize::class );
     }
     public function team() {
-        return $this->belongsTo( OrganizeTeam::class );
+        return $this->belongsTo( Team::class );
     }
     public function role() {
         return $this->belongsTo( AppointmentRole::class );

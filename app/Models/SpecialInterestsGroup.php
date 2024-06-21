@@ -13,4 +13,4 @@
             return $this->belongsTo( Team::class );
         }
     }
-?>
+

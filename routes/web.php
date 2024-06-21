@@ -10,24 +10,27 @@ use App\Http\Controllers\AdmissionTestController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ShopController;
 use App\Http\Middleware\AccountResetToken;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\MobileController;
-use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CertificationController;
-use App\Http\Controllers\CertificateController;
-use App\Http\Controllers\OtherMembershipsController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\SkillController;
-use App\Http\Controllers\WorkController;
-use App\Http\Controllers\CollegeController;
-use App\Http\Controllers\SchoolController;
-use App\Http\Controllers\Admin\Controller as AdminController;
+use App\Http\Controllers\Auth\ForgerPasswordController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\User\Controller as UserController;
+use App\Http\Controllers\User\EmailController;
+use App\Http\Controllers\User\MobileController;
+use App\Http\Controllers\User\AddressController;
+use App\Http\Controllers\User\WorkController;
+use App\Http\Controllers\User\CollegeController;
+use App\Http\Controllers\User\SchoolController;
+use App\Http\Controllers\User\AwardController;
+use App\Http\Controllers\User\NotificationController;
+use App\Http\Controllers\Member\ContactController;
+use App\Http\Controllers\Member\CertificationController;
+use App\Http\Controllers\Member\CertificateController;
+use App\Http\Controllers\Member\OtherMembershipsController;
+use App\Http\Controllers\Member\AppointmentController;
+use App\Http\Controllers\Member\SkillController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\NavigationController as AdminNavigationController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -55,6 +58,7 @@ Route::get( "about-us/board-of-directors", "PageController@boardOfDirectors" )
     ->name( "about-us.board-of-directors" );
 Route::get( "about-us/committees", "PageController@committees" )
     ->name( "about-us.committees" );
+/*
 Route::resource( "/news", NewsController::class )
     ->only( [ "index", "show" ] );
 Route::resource( "/events", EventController::class )
@@ -71,13 +75,14 @@ Route::controller( AdmissionTestController::class )
             Route::post('/order', 'store');
         }
     );
+*/
 Route::resource( "/members", MemberController::class )
     ->only( [ "index", "show" ] );
+/*
 Route::resource( "/shop/products", ShopController::class )
     ->only( [ "index", "show" ] )
     ->names( "shop.products" );
-Route::get( "/privileges", "PageController@show" )
-    ->name( "privileges" );
+*/
 Route::get( "/frequently-asked-question", "PageController@frequentlyAskedQuestion" )
     ->name( "frequently-asked-question" );
 Route::get( "/contact-us", "PageController@contactUs" )
@@ -105,6 +110,7 @@ Route::middleware( "auth" )->group(
         // user
         Route::get( "/logout", "AuthController@logout" )
             ->name( "logout" );
+        /*
         Route::resource( "/cart", CartController::class )
             ->except( [ "create", "show", "edit" ] );
         Route::get( "/check-out", "OrderController@create" )
@@ -115,6 +121,7 @@ Route::middleware( "auth" )->group(
             ->name( "orders.success" );
         Route::get( "/paying/failed", "OrderController@failed" )
             ->name( "orders.failed" );
+        */
         Route::singleton( "/profile", UserController::class );
         Route::resource( "/profile/emails", EmailController::class )
             ->only( [ "store", "update", "destroy" ] );
@@ -124,6 +131,14 @@ Route::middleware( "auth" )->group(
             ->except( [ "index", "create", "edit" ] );
         Route::resource( "/profile/notifications", NotificationController::class )
             ->only( [ "index", "update" ] );
+        Route::resource( "/profile/works", WorkController::class )
+            ->except( [ "index", "create", "edit" ] );
+        Route::resource( "/profile/colleges", CollegeController::class )
+            ->except( [ "index", "create", "edit" ] );
+        Route::resource( "/profile/schools", SchoolController::class )
+            ->except( [ "index", "create", "edit" ] );
+        Route::resource( "/profile/awards", AwardController::class )
+            ->except( [ "index", "create", "edit" ] );
         Route::middleware( "role:Member" )->group(
             function() {
                 Route::resource( "/profile/contacts", ContactController::class )
@@ -133,25 +148,17 @@ Route::middleware( "auth" )->group(
                 Route::resource( "/profile/certificates", CertificateController::class )
                     ->except( [ "index", "create", "edit" ] );
                 Route::resource( "/profile/other-memberships", OtherMembershipsController::class )
-                    ->only( [ "index", "update" ] );
+                    ->except( [ "index", "create", "edit" ] );
                 Route::resource( "/profile/appointments", AppointmentController::class )
-                    ->only( [ "index", "update" ] );
+                    ->except( [ "index", "create", "edit" ] );
                 Route::resource( "/profile/skills", SkillController::class )
-                    ->only( [ "index", "update" ] );
-                Route::resource( "/profile/works", WorkController::class )
-                    ->only( [ "index", "update" ] );
-                Route::resource( "/profile/colleges", CollegeController::class )
-                    ->only( [ "index", "update" ] );
-                Route::resource( "/profile/schools", SchoolController::class )
-                    ->only( [ "index", "update" ] );
-                Route::resource( "/profile/awards", AwardController::class )
-                    ->only( [ "index", "update" ] );
+                    ->except( [ "index", "create", "edit" ] );
             }
         );
         Route::prefix( "admin" )->name( "admin." )->middleware( "role:Administrator" )->group(
             function() {
                 // admin
-                Route::get( "/", [ AdminController:class, "index" ] );
+                Route::get( "/", [ AdminController::class, "index" ] );
                 Route::resource( "/users", AdminUserController::class )
                     ->except( [ "show", "destroy" ] );
                 Route::singleton( "/navigation", AdminNavigationController::class );
@@ -166,9 +173,9 @@ Route::middleware( "auth" )->group(
                 Route::resource( "/admission-test", AdminAdmissionTestController::class )
                     ->except( [ "show", "destroy" ] );
                 Route::get( "/admission-test/check-in/{user}", [ AdminAdmissionTestController::class, "checkIn" ] );
-                Route::resource( "/profile/appointments", AdminAppointmentController::class )
+                Route::resource( "/appointments", AdminAppointmentController::class )
                     ->only( [ "index", "update" ] );
-                Route::resource( "/profile/awards", AdminAwardController::class )
+                Route::resource( "/awards", AdminAwardController::class )
                     ->only( [ "index", "update" ] );
             }
         );

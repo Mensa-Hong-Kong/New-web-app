@@ -22,4 +22,4 @@
             return $this->belongsTo( Event::class );
         }
     }
-?>
+

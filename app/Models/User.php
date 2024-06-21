@@ -8,7 +8,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Member\Member;
+use App\Models\User\Gender;
+use App\Models\User\Email;
+use App\Models\User\Mobile;
+use App\Models\User\Address;
+use App\Models\Shop\Cart;
+use App\Models\Shop\Order;
+use App\Models\User\Award;
+use App\Models\User\HasAward;
+use App\Models\User\School;
+use App\Models\User\HasSchool;
 
 class User extends Authenticatable
 {
@@ -29,8 +38,8 @@ class User extends Authenticatable
         "family_name",
         "date_of_birth",
         "gender_id",
-        "notification_email_id",
-        "notification_mobile_id",
+        "default_email_id",
+        "default_mobile_id",
         "default_address_id",
     ];
 
@@ -53,58 +62,32 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    /**
-     * A model may have multiple roles.
-     */
-    public function roles()
-    {
-        $relation = $this->morphToMany(
-            Role::class,
-            'model',
-            config('permission.table_names.model_has_roles'),
-            config('permission.column_names.model_morph_key'),
-            PermissionRegistrar::$pivotRole
-        );
-
-        if (! PermissionRegistrar::$teams) {
-            return $relation;
-        }
-
-        return $relation->wherePivot(PermissionRegistrar::$teamsKey, getPermissionsTeamId())
-            ->where(function ($q) {
-                $teamField = config('permission.table_names.roles').'.'.PermissionRegistrar::$teamsKey;
-                $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
-            });
-    }
     public function gender() {
         return $this->belongsTo( Gender::class );
     }
     public function email() {
-        return $this->belongsTo( Email::class );
+        return $this->belongsTo( Email::class, 'default_email_id' );
     }
-    public function notificationEmail() {
-        return $this->hasOne( Email::class, "notification_email_id" );
+    public function emails() {
+        return $this->hasMany( Email::class );
     }
     public function mobile() {
-        return $this->belongsTo( Mobile::class );
+        return $this->belongsTo( Mobile::class, 'default_mobile_id' );
     }
-    public function mainAddress() {
-        return $this->hasOne( Address::class, "default_address_id" );
+    public function mobiles() {
+        return $this->hasMany( Mobile::class );
     }
     public function address() {
-        return $this->belongsTo( Mobile::class );
+        return $this->belongsTo( Address::class, 'default_address_id' );
     }
-    public function notificationMobile() {
-        return $this->hasOne( Mobile::class, "notification_email_id" );
+    public function addresses() {
+        return $this->hasMany( Address::class );
     }
-    public function subscriptChannels() {
-        return $this->belongsToMany( Channel::class, "user_subscription_channels" );
+    public function subscriptEmailChannels() {
+        return $this->morphToMany(EmailChannel::class, 'user_subscription_channels');
     }
-    public function testingFee() {
-        return $this->hasOne( AdmissionTestOrder::class );
-    }
-    public function testing() {
-        return $this->hasMany( UserAdmissionTest::class );
+    public function subscriptMobileChannels() {
+        return $this->morphToMany(MobileChannel::class, 'user_subscription_channels');
     }
     public function member(){
         return $this->hasOne( Member::class );
@@ -117,5 +100,14 @@ class User extends Authenticatable
     }
     public function orders(){
         return $this->hasMany( Order::class );
+    }
+    public function awards(){
+        return $this->belongsToMany( Award::class, HasAward::class );
+    }
+    public function schools(){
+        return $this->belongsToMany( School::class, HasSchool::class );
+    }
+    public function canJoinTest(){
+        return !($this->member && $this->tests->count() >= 2);
     }
 }

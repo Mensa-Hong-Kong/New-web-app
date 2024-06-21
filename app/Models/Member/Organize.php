@@ -3,6 +3,7 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 
 class Organize extends Model
 {
@@ -19,6 +20,6 @@ class Organize extends Model
         return $this->hasMany( Appointment::class );
     }
     public function members() {
-        return $this->belongsToMany( Member::class, MemberHasOtherMembership::class );
+        return $this->belongsToMany( Member::class, HasOtherMembership::class );
     }
 }

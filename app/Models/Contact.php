@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Member;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -16,6 +16,7 @@ class Contact extends Pivot
         "type_id",
         "link",
         "contact",
+        "order_number",
     ];
     public function type() {
         return $this->hasOne( ContactType::class );

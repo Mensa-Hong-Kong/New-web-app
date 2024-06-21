@@ -3,6 +3,7 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 
 class Association extends Model
 {
@@ -15,6 +16,6 @@ class Association extends Model
         "name",
     ];
     public function members() {
-        return $this->belongsToMany( Member::class, MemberHasOtherMembership::class );
+        return $this->belongsToMany( Member::class, HasOtherMembership::class );
     }
 }

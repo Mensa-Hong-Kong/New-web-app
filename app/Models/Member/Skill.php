@@ -3,6 +3,7 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 
 class Skill extends Model
 {
@@ -16,7 +17,7 @@ class Skill extends Model
         "type_id",
     ];
     public function type() {
-        return $this->belongsTo( Type::class );
+        return $this->belongsTo( SkillType::class );
     }
     public function members() {
         return $this->belongsToMany( Member::class );

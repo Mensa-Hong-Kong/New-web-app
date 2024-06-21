@@ -3,6 +3,7 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 
 class Certification extends Model
 {
@@ -15,6 +16,6 @@ class Certification extends Model
         "name",
     ];
     public function members() {
-        return $this->belongsToMany( Member::class, MemberHasCertification::class );
+        return $this->belongsToMany( Member::class, HasCertification::class );
     }
 }

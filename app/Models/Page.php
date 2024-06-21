@@ -7,7 +7,7 @@
 
     class Page extends Model {
         protected $fillable = [
-            "path",
+            "url",
             "title", // 中文 30 英文60
             "description",
             "keywords",
@@ -22,4 +22,4 @@
             return $this->morphOne( Navigation::class, "type" );
         }
     }
-?>
+

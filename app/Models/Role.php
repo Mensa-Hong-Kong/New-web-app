@@ -29,4 +29,4 @@
             return $this->morphedByMany(Video::class, 'page_type', "role_can_view_pages" );
         }
     }
-?>
+

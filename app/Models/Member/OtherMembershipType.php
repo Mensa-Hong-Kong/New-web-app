@@ -3,6 +3,7 @@
 namespace App\Models\Member;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Member;
 
 class OtherMembershipType extends Model
 {
@@ -14,4 +15,7 @@ class OtherMembershipType extends Model
     protected $fillable = [
         "name"
     ];
+    public function members() {
+        return $this->belongsToMany( Member::class, HasOtherMembership::class );
+    }
 }
